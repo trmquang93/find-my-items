@@ -163,6 +163,9 @@ extension CameraViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         // Get pixel buffer from sample buffer
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            DispatchQueue.main.async {
+                self.detectionError = "Failed to extract image from camera frame"
+            }
             return
         }
         
@@ -170,22 +173,41 @@ extension CameraViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
         visionManager?.processFrame(pixelBuffer) { [weak self] items, error in
             guard let self = self else { return }
             
-            if let error = error {
-                self.detectionError = "Detection error: \(error.localizedDescription)"
-                return
-            }
-            
-            if let items = items {
-                // Update all detected objects
-                self.detectedObjects = items
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.detectionError = "Detection error: \(error.localizedDescription)"
+                    print("Object detection error: \(error.localizedDescription)")
+                    return
+                }
                 
-                // Match against current search query
-                if let searchParameters = self.currentSearchParameters {
-                    self.matchingObjects = self.objectMatcher.matchObjects(
-                        detectedObjects: items,
-                        searchParameters: searchParameters
-                    )
+                // Clear any previous errors on successful processing
+                self.detectionError = nil
+                
+                if let items = items {
+                    // Update all detected objects
+                    self.detectedObjects = items
+                    
+                    // Log detection results
+                    print("Detected \(items.count) objects")
+                    if !items.isEmpty {
+                        let labels = items.map { "\($0.label) (\(Int($0.confidence * 100))%)" }.joined(separator: ", ")
+                        print("Objects detected: \(labels)")
+                    }
+                    
+                    // Match against current search query
+                    if let searchParameters = self.currentSearchParameters {
+                        self.matchingObjects = self.objectMatcher.matchObjects(
+                            detectedObjects: items,
+                            searchParameters: searchParameters
+                        )
+                        
+                        print("Found \(self.matchingObjects.count) matching objects for query")
+                    } else {
+                        self.matchingObjects = []
+                    }
                 } else {
+                    print("No objects detected in frame")
+                    self.detectedObjects = []
                     self.matchingObjects = []
                 }
             }

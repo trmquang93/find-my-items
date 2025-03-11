@@ -9,6 +9,28 @@ import SwiftUI
 import AVFoundation
 import UIKit
 
+class UICameraPreview: UIView {
+    override class var layerClass: AnyClass {
+        return AVCaptureVideoPreviewLayer.self
+    }
+    
+    var previewLayer: AVCaptureVideoPreviewLayer {
+        return layer as! AVCaptureVideoPreviewLayer
+    }
+    
+    let cameraManager: CameraManager
+    
+    init(cameraManager: CameraManager) {
+        self.cameraManager = cameraManager
+        super.init(frame: .zero)
+        previewLayer.session = cameraManager.session
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 /// A SwiftUI view that represents the camera preview
 struct CameraPreview: UIViewRepresentable {
     /// Camera manager to get the preview layer from
@@ -16,13 +38,8 @@ struct CameraPreview: UIViewRepresentable {
     
     /// Creates a UIView from a SwiftUI view
     func makeUIView(context: Context) -> UIView {
-        let view = UIView(frame: UIScreen.main.bounds)
-        
-        let previewLayer = cameraManager.getPreviewLayer()
-        previewLayer.frame = view.bounds
-        
-        view.layer.addSublayer(previewLayer)
-        
+        let view = UICameraPreview(cameraManager: cameraManager)
+
         // Add tap gesture to handle focus
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
         view.addGestureRecognizer(tapGesture)
@@ -32,9 +49,6 @@ struct CameraPreview: UIViewRepresentable {
     
     /// Updates the view when SwiftUI state changes
     func updateUIView(_ uiView: UIView, context: Context) {
-        if let layer = uiView.layer.sublayers?.first as? AVCaptureVideoPreviewLayer {
-            layer.frame = uiView.bounds
-        }
     }
     
     /// Creates a coordinator to handle interactions
