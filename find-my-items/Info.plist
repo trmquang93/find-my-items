@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Find My Items needs camera access to help you locate objects by analyzing what the camera sees.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Find My Items may use the microphone for audio feedback when items are found.</string>
+</dict>
+</plist> 
