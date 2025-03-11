@@ -116,6 +116,10 @@ struct BoundingBoxView: View {
             return Color.blue
         case .potentialLocation:
             return Color.orange
+        case .partialMatch:
+            return Color.yellow
+        default:
+            return Color.gray
         }
     }
 }

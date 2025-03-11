@@ -34,23 +34,6 @@ struct SearchOverlayView: View {
         self.onSearch = onSearch
         self.onFlashlightTap = onFlashlightTap
         self.isFlashlightOn = isFlashlightOn
-        
-        // Listen for keyboard notifications
-        NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillShowNotification,
-            object: nil,
-            queue: .main
-        ) { _ in
-            self._isKeyboardShown.wrappedValue = true
-        }
-        
-        NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillHideNotification,
-            object: nil,
-            queue: .main
-        ) { _ in
-            self._isKeyboardShown.wrappedValue = false
-        }
     }
     
     var body: some View {

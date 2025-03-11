@@ -27,6 +27,8 @@
 		4DA9E8762D7FCC54003EDECE /* find-my-items.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "find-my-items.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DA9E8862D7FCC58003EDECE /* find-my-itemsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "find-my-itemsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DA9E8902D7FCC58003EDECE /* find-my-itemsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "find-my-itemsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DA9E8BD2D7FD82D003EDECE /* COREML_MODEL_SETUP.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = COREML_MODEL_SETUP.md; sourceTree = "<group>"; };
+		4DA9E8C02D7FD82D003EDECE /* SETUP_INSTRUCTIONS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SETUP_INSTRUCTIONS.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +77,8 @@
 		4DA9E86D2D7FCC54003EDECE = {
 			isa = PBXGroup;
 			children = (
+				4DA9E8BD2D7FD82D003EDECE /* COREML_MODEL_SETUP.md */,
+				4DA9E8C02D7FD82D003EDECE /* SETUP_INSTRUCTIONS.md */,
 				4DA9E8782D7FCC54003EDECE /* find-my-items */,
 				4DA9E8892D7FCC58003EDECE /* find-my-itemsTests */,
 				4DA9E8932D7FCC58003EDECE /* find-my-itemsUITests */,
@@ -399,6 +403,8 @@
 				DEVELOPMENT_TEAM = GVL2FAL6KF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Find My Items needs camera access to help you locate objects by analyzing what the camera sees.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Find My Items may use the microphone for audio feedback when items are found.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +434,8 @@
 				DEVELOPMENT_TEAM = GVL2FAL6KF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Find My Items needs camera access to help you locate objects by analyzing what the camera sees.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Find My Items may use the microphone for audio feedback when items are found.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
